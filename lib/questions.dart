@@ -11,7 +11,7 @@ class Questions {
 }
 
 
-//We solved the Issues of null safety and we learned the follwing
+//We solved the Issues of null safety and we learned the following
 //1. Using late keyword helped in dealing with null-safety error
 //2. Using the 'this keyword' helped in accessing the late defined instances during the runtime.
 

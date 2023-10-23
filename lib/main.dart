@@ -7,7 +7,7 @@ runApp(const Quizzler());
 
 }
 
-class Quizzler extends StatelessWidget {
+class Quizzler extends StatelessWidget { // here the word extends is used to inherit all the properties of statelessWidget
   const Quizzler({super.key});
 
   @override
@@ -48,7 +48,7 @@ class _QuizPageState extends State<QuizPage> {
            child: Container(
              child:  Center(
                child:  Text(
-                brain.questionreserve[count].myString, //Ask why here
+                brain.getQuestionText(), //Ask why here
                  //We are simply providing text widget with a string argument
                  style:
                  const TextStyle(fontSize: 17.0,fontWeight: FontWeight.bold,color: Colors.white),
@@ -66,15 +66,16 @@ class _QuizPageState extends State<QuizPage> {
                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
              ),
              onPressed: () {
-               bool correctAns = brain.questionreserve[count].myBoolean;
+               bool correctAns = brain.getAnswer();
                setState(() {
-                 count++;
+
                  if(correctAns == true)
                    {
                  scoreKeeper.add(const Icon(Icons.check,color: Colors.green),);}
                  else{
                    scoreKeeper.add(const Icon(Icons.close,color: Colors.red),);
                  }
+                 brain.nextQuestion();
 
                });
              },
@@ -93,15 +94,16 @@ class _QuizPageState extends State<QuizPage> {
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ),
               onPressed: () {
-                bool correctAns = brain.questionreserve[count].myBoolean;
+                bool correctAns = brain.getAnswer();
                 setState(() {
-                  count++;
+
                   if(correctAns == true)
                   {
                     scoreKeeper.add(const Icon(Icons.check,color: Colors.green),);}
                   else{
                     scoreKeeper.add(const Icon(Icons.close,color: Colors.red),);
                   }
+                  brain.nextQuestion();
 
 
                 });
