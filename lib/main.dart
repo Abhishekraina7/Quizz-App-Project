@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'questions.dart';
+import 'quizzbrain.dart';
 
 
 void main() {
@@ -31,29 +31,13 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List <Widget>scoreKeeper = []; //We created this list because we can use it later anywher
+  Quizzbrain brain = Quizzbrain(); // So this a object that I used to get the questions and answers from the quizzbrain file.
 
  //TODO: You need to understand why I created a separte class and used it to shorten the code
 
 
-  // List <String>questions = [
-  //   'You can lead a Cow down stairs but not up stairs.',
-  //   'Approximately one quarter  of human  bones  are in the feet.',
-  //   'A slug\'s blood is green.',
-  // ];
-  // List<bool> answers = [false, true,true];
+  int count = 0; // this helps in keeping the track of question number
 
-
-  List<Questions> questionreserve =[
-
-Questions('You can lead a Cow down stairs but not up stairs.',false ),
-   Questions('Approximately one quarter  of human  bones  are in the feet.', true),
-    Questions('A slug\'s blood is green.',true )
-
-
-  ];
-
-
-  int count = 0;
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -64,7 +48,7 @@ Questions('You can lead a Cow down stairs but not up stairs.',false ),
            child: Container(
              child:  Center(
                child:  Text(
-                questionreserve[count].myString, //Ask why here
+                brain.questionreserve[count].myString, //Ask why here
                  //We are simply providing text widget with a string argument
                  style:
                  const TextStyle(fontSize: 17.0,fontWeight: FontWeight.bold,color: Colors.white),
@@ -82,7 +66,7 @@ Questions('You can lead a Cow down stairs but not up stairs.',false ),
                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
              ),
              onPressed: () {
-               bool correctAns = questionreserve[count].myBoolean;
+               bool correctAns = brain.questionreserve[count].myBoolean;
                setState(() {
                  count++;
                  if(correctAns == true)
@@ -109,7 +93,7 @@ Questions('You can lead a Cow down stairs but not up stairs.',false ),
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ),
               onPressed: () {
-                bool correctAns = questionreserve[count].myBoolean;
+                bool correctAns = brain.questionreserve[count].myBoolean;
                 setState(() {
                   count++;
                   if(correctAns == true)
