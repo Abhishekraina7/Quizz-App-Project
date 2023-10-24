@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'quizzbrain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 
 void main() {
@@ -32,11 +34,40 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List <Widget>scoreKeeper = []; //We created this list because we can use it later anywher
   Quizzbrain brain = Quizzbrain(); // So this a object that I used to get the questions and answers from the quizzbrain file.
+  // this helps in keeping the track of question number
 
- //TODO: You need to understand why I created a separte class and used it to shorten the code
 
+void checkAnswer() //this function is used to keep in check wheather you have reached the end or not
+{
+  bool correctAnswer =brain.getAnswer();
+  setState(() {
 
-  int count = 0; // this helps in keeping the track of question number
+if(brain.theEnd() == true)  //if list has ended then we reset the list and shows alert pop message
+  {
+    Alert(context: context,
+        title: "Finished",
+        desc: "All the question are attempted").show();
+
+    brain.reset(); //reseted the list of questions
+    scoreKeeper = []; // rested the scorekeeper list to zero displaying a blank question
+  }
+else{
+  if(correctAnswer== true)
+    {
+      scoreKeeper.add(const Icon(
+        Icons.check,
+        color: Colors.green,
+      ));
+    } else {
+    scoreKeeper.add(const Icon(
+      Icons.close,
+      color: Colors.red,
+    ));
+  }
+  brain.nextQuestion();
+}
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +79,9 @@ class _QuizPageState extends State<QuizPage> {
            child: Container(
              child:  Center(
                child:  Text(
+
                 brain.getQuestionText(), //Ask why here
-                 //We are simply providing text widget with a string argument
+                 //We are simply providing text widget with a string argument\
                  style:
                  const TextStyle(fontSize: 17.0,fontWeight: FontWeight.bold,color: Colors.white),
                ),
@@ -66,18 +98,19 @@ class _QuizPageState extends State<QuizPage> {
                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
              ),
              onPressed: () {
-               bool correctAns = brain.getAnswer();
-               setState(() {
+              checkAnswer();
 
-                 if(correctAns == true)
-                   {
-                 scoreKeeper.add(const Icon(Icons.check,color: Colors.green),);}
-                 else{
-                   scoreKeeper.add(const Icon(Icons.close,color: Colors.red),);
-                 }
-                 brain.nextQuestion();
-
-               });
+               // setState(() {
+               //
+               //   if(correctAns == true)
+               //     {
+               //   scoreKeeper.add(const Icon(Icons.check,color: Colors.green),);}
+               //   else{
+               //     scoreKeeper.add(const Icon(Icons.close,color: Colors.red),);
+               //   }
+               //   brain.nextQuestion();
+               //
+               // });
              },
              child: const Text('True', style: TextStyle(fontSize: 24, color: Colors.white),),
            )
@@ -94,19 +127,19 @@ class _QuizPageState extends State<QuizPage> {
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ),
               onPressed: () {
-                bool correctAns = brain.getAnswer();
-                setState(() {
-
-                  if(correctAns == true)
-                  {
-                    scoreKeeper.add(const Icon(Icons.check,color: Colors.green),);}
-                  else{
-                    scoreKeeper.add(const Icon(Icons.close,color: Colors.red),);
-                  }
-                  brain.nextQuestion();
-
-
-                });
+               checkAnswer();
+                // setState(() {
+                //
+                //   if(correctAns == true)
+                //   {
+                //     scoreKeeper.add(const Icon(Icons.check,color: Colors.green),);}
+                //   else{
+                //     scoreKeeper.add(const Icon(Icons.close,color: Colors.red),);
+                //   }
+                //   brain.nextQuestion();
+                //
+                //
+                // });
               },
               child: const Text('False', style: TextStyle(fontSize: 24, color: Colors.white),),
             ),
