@@ -4,7 +4,7 @@ class Questions {
   late String myString;
   late bool myBoolean;
 
-  Questions(String myString, bool myBoolean) {
+  Questions( String myString, bool myBoolean) { // this is a constructor which works as transport of questions and answers
     this.myString = myString;
     this.myBoolean = myBoolean;
   }
