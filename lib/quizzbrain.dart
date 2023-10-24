@@ -3,8 +3,8 @@
 import 'questions.dart';
 
 class Quizzbrain {
-   int _count=0;
-  final List<Questions> _questionreserve = [
+  int _count = 0;
+   List<Questions> _questionreserve = [
     //I made this list a private member so that main can't have direct access to questions and answers.
 
     Questions('Some cats are actually allergic to humans', true),
@@ -39,18 +39,42 @@ class Quizzbrain {
 
   // Made following methods which will only pass the answers and questions required by the main.dart file not the whole list's access.
   // by doing so we made our code more abstract and encapsulated with high security.
-void nextQuestion() {
-  if (_count < _questionreserve.length-1) {
-   _count++;
-  }
-}
-    String getQuestionText() {
-      return _questionreserve[_count].myString;
-    }
-    bool getAnswer() {
-      return _questionreserve[_count].myBoolean;
+  void nextQuestion() {
+    if (_count < _questionreserve.length - 1) {
+      _count++;
     }
   }
+
+  String getQuestionText() {
+    return _questionreserve[_count].myString;
+  }
+
+  bool getAnswer() {
+    return _questionreserve[_count].myBoolean;
+  }
+
+  bool theEnd() // this function checks the wheather we reached the end of the program or not
+  {
+    if(_count > _questionreserve.length -1)
+      {
+        return true;
+      }
+    else{
+      return false;
+    }
+
+  }
+  void reset() { //this function resets the list to the initial point
+  _count =0;
+  }
+
+  }
+
+
+
+
+
+
 
 
 
