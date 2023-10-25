@@ -37,7 +37,7 @@ class _QuizPageState extends State<QuizPage> {
   // this helps in keeping the track of question number
 
 
-void checkAnswer() //this function is used to keep in check wheather you have reached the end or not
+void checkAnswer(bool userPickedAnswer) //this function is used to keep in check wheather you have reached the end or not
 {
   bool correctAnswer =brain.getAnswer();
   setState(() {
@@ -52,7 +52,7 @@ if(brain.theEnd() == true)  //if list has ended then we reset the list and shows
     scoreKeeper = []; // rested the scorekeeper list to zero displaying a blank question
   }
 else{
-  if(correctAnswer== true)
+  if(userPickedAnswer == correctAnswer)
     {
       scoreKeeper.add(const Icon(
         Icons.check,
@@ -98,7 +98,7 @@ else{
                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
              ),
              onPressed: () {
-              checkAnswer();
+              checkAnswer(true);
 
                // setState(() {
                //
@@ -127,7 +127,7 @@ else{
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ),
               onPressed: () {
-               checkAnswer();
+               checkAnswer(false);
                 // setState(() {
                 //
                 //   if(correctAns == true)
