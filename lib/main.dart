@@ -44,9 +44,25 @@ void checkAnswer(bool userPickedAnswer) //this function is used to keep in check
 
 if(brain.theEnd() == true)  //if list has ended then we reset the list and shows alert pop message
   {
-    Alert(context: context,
-        title: "Finished",
-        desc: "All the question are attempted").show();
+    // Alert(context: context,
+    //     title: "Finished",
+    //     desc: "All the question are attempted").show();
+  Alert(
+    context: context,
+    type: AlertType.error,
+    title: "Finished",
+    desc: "No more questions",
+    buttons: [
+      DialogButton(
+        child:const Text(
+          "RESET",
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        onPressed: () => Navigator.pop(context),
+        width: 120,
+      )
+    ],
+  ).show();
 
     brain.reset(); //reseted the list of questions
     scoreKeeper = []; // rested the scorekeeper list to zero displaying a blank question
