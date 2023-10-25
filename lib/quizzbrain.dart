@@ -55,10 +55,11 @@ class Quizzbrain {
 
   bool theEnd() // this function checks the wheather we reached the end of the program or not
   {
-    if(_count > _questionreserve.length -1)
+    if(_count >= _questionreserve.length-1)
       {
         return true;
       }
+
     else{
       return false;
     }
