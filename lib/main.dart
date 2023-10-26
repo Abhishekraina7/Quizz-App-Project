@@ -15,11 +15,13 @@ class Quizzler extends StatelessWidget { // here the word extends is used to inh
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.black,
-        body: SafeArea(
+   backgroundColor: Colors.black,
+body: SafeArea(
     child: QuizPage(),
         ),
+        ,
       ),
     );
   }
@@ -49,12 +51,12 @@ if(brain.theEnd() == true)  //if list has ended then we reset the list and shows
     //     desc: "All the question are attempted").show();
   Alert(
     context: context,
-    type: AlertType.error,
+    type: AlertType.warning,
     title: "Finished",
     desc: "No more questions",
     buttons: [
       DialogButton(
-        child:const Text(
+        child: Text(
           "RESET",
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
